@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import RankingTable from "$lib/components/RankingTable.svelte";
 
     let rankings = [];
     let snapshots = [];
@@ -9,7 +10,7 @@
     onMount(async () => {
         const response = await fetch("/api/rankings");
         const data = await response.json();
-        snapshots = data.rankings.map(e => e.snapshotDate);
+        snapshots = data.rankings.map((e) => e.snapshotDate);
         rankings = data.rankings;
         maxValue = snapshots.length - 1;
         sliderValue = maxValue;
@@ -19,21 +20,19 @@
 <main>
     <h3>{sliderValue}</h3>
     <div class="slider">
-        <input type="range" min=0 max={maxValue} bind:value={sliderValue}>
+        <input type="range" min="0" max={maxValue} bind:value={sliderValue} />
     </div>
     {#if snapshots[sliderValue]}
         <h2>{snapshots[sliderValue]}</h2>
     {/if}
     {#if rankings[sliderValue]}
-        {#each rankings[sliderValue].entries as user}
-            <p>{user.username}</p>
-        {/each}
+        <RankingTable users={rankings[sliderValue].entries} />
     {/if}
 </main>
 
 <style>
     main {
-        background-color: hsl(125, 15%, 15%);
+        background-color: hsl(var(--green), 15%, 15%);
         width: calc(100% - 40px);
         max-width: 1000px;
         padding: 20px 50px;

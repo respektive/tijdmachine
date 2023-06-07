@@ -1,0 +1,13 @@
+:root {
+    @import url("https://fonts.cdnfonts.com/css/comfortaa");
+    font-family: "Comfortaa", sans-serif;
+
+    --pink: 333;
+    --purple: 255;
+    --blue: 200;
+    --green: 125;
+    --lime: 90;
+    --orange: 45;
+    --red: 360;
+    --darkorange: 20;
+}

@@ -1,3 +1,6 @@
+<script>
+    import "../app.css";
+</script>
 
 <nav>
     <ul>
@@ -7,15 +10,11 @@
     </ul>
 </nav>
 
-<slot></slot>
-
-<footer>
-    osu
-</footer>
+<slot />
 
 <style>
     nav {
-        background-color: hsl(125, 30%, 30%);
+        background-color: hsl(var(--green), 30%, 30%);
         padding: 20px;
     }
 
@@ -36,16 +35,7 @@
 
     :global(body) {
         margin: 0;
-        background-color: hsl(125, 10%, 10%);
+        background-color: hsl(var(--green), 10%, 10%);
         color: white;
-    }
-
-    footer {
-        background-color: hsl(125, 20%, 20%);
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        position: fixed;
-        bottom: 0;
     }
 </style>

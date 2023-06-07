@@ -1,4 +1,4 @@
-import { start, stop } from "$lib/api/mongo.js";
+import { start, stop } from "$lib/server/mongo.js";
 
 export async function handle({ event, resolve }) {
     await start();
