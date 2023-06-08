@@ -5,9 +5,7 @@
         const hex = countryCode
             .toUpperCase()
             .split("")
-            .map((char) =>
-                (127397 + char.charCodeAt()).toString(16).toLowerCase()
-            );
+            .map((char) => (127397 + char.charCodeAt()).toString(16).toLowerCase());
         return hex.join("-");
     }
 
@@ -49,9 +47,7 @@
         <a href="https://osu.ppy.sh/users/{user.userId}">{user.username}</a>
     </td>
     <td class="ranking-row dimmed">
-        {typeof user.accuracy === "string"
-            ? user.accuracy
-            : user.accuracy.toFixed(2) + "%"}
+        {typeof user.accuracy === "string" ? user.accuracy : user.accuracy.toFixed(2) + "%"}
     </td>
     <td class="ranking-row dimmed">
         {formatValue(user.playcount)}

@@ -11,13 +11,9 @@
             <th class="ranking-table-head dimmed">Accuracy</th>
             <th class="ranking-table-head dimmed">Play Count</th>
             <th class="ranking-table-head">Performance</th>
-            <th class="ranking-table-head ranking-table-head-grade dimmed"
-                >SS</th
-            >
-            <th class="ranking-table-head ranking-table-head-grade dimmed">S</th
-            >
-            <th class="ranking-table-head ranking-table-head-grade dimmed">A</th
-            >
+            <th class="ranking-table-head ranking-table-head-grade dimmed">SS</th>
+            <th class="ranking-table-head ranking-table-head-grade dimmed">S</th>
+            <th class="ranking-table-head ranking-table-head-grade dimmed">A</th>
         </tr>
     </thead>
     <tbody>
