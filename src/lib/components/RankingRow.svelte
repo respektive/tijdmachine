@@ -55,7 +55,7 @@
     <td class="ranking-row">
         {formatValue(Math.round(user.pp))}
     </td>
-    {#if user.scoreRank}
+    {#if "scoreRank" in user}
         <td class="ranking-row dimmed">
             {formatValue(user.scoreRank)}
         </td>
