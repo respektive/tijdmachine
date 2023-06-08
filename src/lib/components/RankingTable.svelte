@@ -11,6 +11,9 @@
             <th class="ranking-table-head dimmed">Accuracy</th>
             <th class="ranking-table-head dimmed">Play Count</th>
             <th class="ranking-table-head">Performance</th>
+            {#if users[0].scoreRank}
+                <th class="ranking-table-head dimmed">Score Rank</th>
+            {/if}
             <th class="ranking-table-head ranking-table-head-grade dimmed">SS</th>
             <th class="ranking-table-head ranking-table-head-grade dimmed">S</th>
             <th class="ranking-table-head ranking-table-head-grade dimmed">A</th>

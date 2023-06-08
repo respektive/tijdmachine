@@ -55,6 +55,11 @@
     <td class="ranking-row">
         {formatValue(user.pp)}
     </td>
+    {#if user.scoreRank}
+        <td class="ranking-row dimmed">
+            {formatValue(user.scoreRank)}
+        </td>
+    {/if}
     <td class="ranking-row dimmed">
         {getGradeCount(user, "SS")}
     </td>
