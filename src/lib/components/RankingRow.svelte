@@ -1,5 +1,6 @@
 <script>
     export let user;
+    export let type;
 
     function getFlagEmoji(countryCode) {
         const hex = countryCode
@@ -26,11 +27,32 @@
         }
     }
 
+    function abbreviateNumber(number) {
+        if (!number || typeof number === "string") return number;
+
+        return Intl.NumberFormat("en-US", {
+            notation: "compact",
+            maximumFractionDigits: 2,
+        }).format(number);
+    }
+
     function formatValue(value) {
-        if (typeof value === "string") return value;
+        if (!value || typeof value === "string") return value;
 
         return value.toLocaleString("en-US");
     }
+
+    const columns = [
+        "accuracy",
+        "playcount",
+        "totalScore",
+        "rankedScore",
+        "pp",
+        "scoreRank",
+        "countSS",
+        "countS",
+        "countA",
+    ];
 </script>
 
 <tr>
@@ -38,37 +60,42 @@
         #{user.rank}
     </td>
     <td class="ranking-row ranking-row-user">
-        <div
-            class="flag-country"
-            style="background-image: url('https://osu.ppy.sh/assets/images/flags/{getFlagEmoji(
-                user.countryCode
-            )}.svg');"
-        />
+        {#if user.countryCode}
+            <div
+                class="flag-country"
+                style="background-image: url('https://osu.ppy.sh/assets/images/flags/{getFlagEmoji(
+                    user.countryCode
+                )}.svg');"
+            />
+        {/if}
         <a href="https://osu.ppy.sh/users/{user.userId}">{user.username}</a>
     </td>
-    <td class="ranking-row dimmed">
-        {typeof user.accuracy === "string" ? user.accuracy : user.accuracy.toFixed(2) + "%"}
-    </td>
-    <td class="ranking-row dimmed">
-        {formatValue(user.playcount)}
-    </td>
-    <td class="ranking-row">
-        {formatValue(Math.round(user.pp))}
-    </td>
-    {#if "scoreRank" in user}
-        <td class="ranking-row dimmed">
-            {formatValue(user.scoreRank)}
-        </td>
-    {/if}
-    <td class="ranking-row dimmed">
-        {getGradeCount(user, "SS")}
-    </td>
-    <td class="ranking-row dimmed">
-        {getGradeCount(user, "S")}
-    </td>
-    <td class="ranking-row dimmed">
-        {getGradeCount(user, "A")}
-    </td>
+    {#each columns as key}
+        {@const isGrade = ["countSS", "countS", "countA"].includes(key)}
+        {#if key in user}
+            {#if key === "pp" && type === "performance"}
+                <td class="ranking-row">{formatValue(Math.round(user.pp))}</td>
+            {:else if key === "rankedScore" && type === "score"}
+                <td class="ranking-row">{abbreviateNumber(user.rankedScore)}</td>
+            {:else if key === "totalScore" && type === "score"}
+                <td class="ranking-row dimmed">{abbreviateNumber(user.totalScore)}</td>
+            {:else if key !== "pp" && key !== "rankedScore" && key !== "totalScore"}
+                <td class="ranking-row dimmed">
+                    {#if key === "accuracy"}
+                        {typeof user.accuracy === "string"
+                            ? user.accuracy
+                            : user.accuracy.toFixed(2) + "%"}
+                    {:else}
+                        {formatValue(user[key])}
+                    {/if}
+                </td>
+            {/if}
+        {:else if isGrade && "grades" in user}
+            <td class="ranking-row dimmed">
+                {getGradeCount(user, "S")}
+            </td>
+        {/if}
+    {/each}
 </tr>
 
 <style>
@@ -88,6 +115,7 @@
 
     .ranking-row {
         padding: 6px 0;
+        line-height: 20px;
     }
 
     .ranking-row-rank {
@@ -102,7 +130,6 @@
     .ranking-row-user a {
         color: hsl(var(--base-hue), 40%, 80%);
         text-decoration: none;
-        margin-left: 10px;
     }
 
     .ranking-row-user a:hover {
@@ -114,6 +141,7 @@
     }
 
     .flag-country {
+        margin-right: 10px;
         height: 20px;
         width: 27.7778px;
         background-size: cover;

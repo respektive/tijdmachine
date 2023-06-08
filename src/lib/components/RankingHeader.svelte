@@ -1,10 +1,43 @@
+<script>
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
+    let activeType = "performance";
+
+    function changeType(type) {
+        dispatch("typechange", {
+            type,
+        });
+    }
+</script>
+
 <div class="header-bar">
     <ul class="type-switcher">
         <li class="type-switcher-item">
-            <a href="/">performance</a>
+            <a
+                href="/"
+                on:click={() => {
+                    changeType("performance");
+                    activeType = "performance";
+                }}
+                class="type-switcher-item-link"
+                class:active={activeType === "performance"}
+            >
+                performance
+            </a>
         </li>
         <li class="type-switcher-item">
-            <a href="/">score</a>
+            <a
+                href="/"
+                on:click={() => {
+                    changeType("score");
+                    activeType = "score";
+                }}
+                class="type-switcher-item-link"
+                class:active={activeType === "score"}
+            >
+                score
+            </a>
         </li>
     </ul>
 
@@ -40,13 +73,17 @@
     }
 
     .type-switcher-item {
-        font-weight: 700;
         padding: 15px 0;
     }
 
-    .type-switcher-item a {
+    .type-switcher-item-link {
         text-decoration: none;
         color: hsl(var(--base-hue), 40%, 75%);
+    }
+
+    .active {
+        font-weight: 700;
+        color: white;
     }
 
     .mode-switcher {
