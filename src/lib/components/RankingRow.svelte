@@ -53,7 +53,7 @@
         {formatValue(user.playcount)}
     </td>
     <td class="ranking-row">
-        {formatValue(user.pp)}
+        {formatValue(Math.round(user.pp))}
     </td>
     {#if user.scoreRank}
         <td class="ranking-row dimmed">
