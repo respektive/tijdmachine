@@ -52,6 +52,6 @@
     }
 
     .dimmed {
-        color: hsl(var(--green), 10%, 60%);
+        color: hsl(var(--base-hue), 10%, 60%);
     }
 </style>

@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import RankingTable from "$lib/components/RankingTable.svelte";
+    import RankingHeader from "../lib/components/RankingHeader.svelte";
 
     let rankings = [];
     let snapshots = [];
@@ -18,26 +19,32 @@
 </script>
 
 <main>
-    <h3>{sliderValue}</h3>
-    <div class="slider">
-        <input type="range" min="0" max={maxValue} bind:value={sliderValue} />
+    <RankingHeader />
+    <div class="ranking">
+        <h3>{sliderValue}</h3>
+        <div class="slider">
+            <input type="range" min="0" max={maxValue} bind:value={sliderValue} />
+        </div>
+        {#if snapshots[sliderValue]}
+            <h2>{snapshots[sliderValue]}</h2>
+        {/if}
+        {#if rankings[sliderValue]}
+            <RankingTable users={rankings[sliderValue].entries} />
+        {/if}
     </div>
-    {#if snapshots[sliderValue]}
-        <h2>{snapshots[sliderValue]}</h2>
-    {/if}
-    {#if rankings[sliderValue]}
-        <RankingTable users={rankings[sliderValue].entries} />
-    {/if}
 </main>
 
 <style>
     main {
-        background-color: hsl(var(--green), 15%, 15%);
         width: calc(100% - 40px);
         max-width: 1000px;
-        padding: 20px 50px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .ranking {
+        background-color: hsl(var(--base-hue), 15%, 15%);
+        padding: 20px 50px;
         margin-bottom: 100px;
     }
 

@@ -83,7 +83,7 @@
     }
 
     td {
-        background-color: hsl(var(--green), 10%, 20%);
+        background-color: hsl(var(--base-hue), 10%, 20%);
     }
 
     .ranking-row {
@@ -100,7 +100,7 @@
     }
 
     .ranking-row-user a {
-        color: hsl(var(--green), 40%, 80%);
+        color: hsl(var(--base-hue), 40%, 80%);
         text-decoration: none;
         margin-left: 10px;
     }
@@ -110,7 +110,7 @@
     }
 
     .dimmed {
-        color: hsl(var(--green), 10%, 60%);
+        color: hsl(var(--base-hue), 10%, 60%);
     }
 
     .flag-country {

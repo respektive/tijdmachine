@@ -14,7 +14,7 @@
 
 <style>
     nav {
-        background-color: hsl(var(--green), 30%, 30%);
+        background-color: hsl(var(--base-hue), 30%, 30%);
         padding: 20px;
     }
 
@@ -31,11 +31,5 @@
     a {
         color: white;
         text-decoration: none;
-    }
-
-    :global(body) {
-        margin: 0;
-        background-color: hsl(var(--green), 10%, 10%);
-        color: white;
     }
 </style>
