@@ -4,6 +4,9 @@ import { error, json } from "@sveltejs/kit";
 export async function GET({ url }) {
     const mode = url.searchParams.get("mode");
     const type = url.searchParams.get("type");
+    const date = url.searchParams.get("date");
+    const before = url.searchParams.get("before");
+    const after = url.searchParams.get("after");
 
     try {
         const client = getClient();
@@ -11,8 +14,18 @@ export async function GET({ url }) {
 
         const db = client.db(dbString);
         const collection = db.collection(collectionString);
+        if (date) {
+            return new json(
+                await collection.findOne({ snapshotDate: date }, { projection: { _id: 0 } })
+            );
+        }
+
+        const query = {};
+        if (before) query.snapshotDate = { $lt: before };
+        if (after) query.snapshotDate = { $gte: after };
+
         const data = await collection
-            .find({}, { projection: { _id: 0 } })
+            .find(query, { projection: { _id: 0 } })
             .sort({ snapshotDate: 1 })
             .toArray();
 
