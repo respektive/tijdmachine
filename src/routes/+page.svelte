@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import RankingTable from "$lib/components/RankingTable.svelte";
-    import RankingHeader from "../lib/components/RankingHeader.svelte";
+    import RankingHeader from "$lib/components/RankingHeader.svelte";
 
     let type = "performance";
     let rankings = [];
