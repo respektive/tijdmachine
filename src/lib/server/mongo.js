@@ -33,5 +33,5 @@ export function getCollection(mode, type) {
     const dbString = `${validType}LeaderboardSnapshotsDB`;
     const collectionString = `${validMode}Snapshots`;
 
-    return { dbString, collectionString };
+    return { dbString, collectionString, validMode, validType };
 }

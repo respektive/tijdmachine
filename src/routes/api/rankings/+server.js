@@ -10,7 +10,7 @@ export async function GET({ url }) {
 
     try {
         const client = getClient();
-        const { dbString, collectionString } = getCollection(mode, type);
+        const { dbString, collectionString, validMode, validType } = getCollection(mode, type);
 
         const db = client.db(dbString);
         const collection = db.collection(collectionString);
@@ -31,6 +31,8 @@ export async function GET({ url }) {
 
         return new json({
             rankings: data,
+            mode: validMode,
+            type: validType,
         });
     } catch {
         throw error(500, "Internal Server Error");

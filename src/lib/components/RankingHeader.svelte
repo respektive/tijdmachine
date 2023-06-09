@@ -1,41 +1,20 @@
 <script>
-    import { createEventDispatcher } from "svelte";
-
-    const dispatch = createEventDispatcher();
-    let activeType = "performance";
-
-    function changeType(type) {
-        dispatch("typechange", {
-            type,
-        });
-    }
+    export let type;
 </script>
 
 <div class="header-bar">
     <ul class="type-switcher">
         <li class="type-switcher-item">
             <a
-                href="/"
-                on:click={() => {
-                    changeType("performance");
-                    activeType = "performance";
-                }}
+                href="/?type=performance"
                 class="type-switcher-item-link"
-                class:active={activeType === "performance"}
+                class:active={type === "performance"}
             >
                 performance
             </a>
         </li>
         <li class="type-switcher-item">
-            <a
-                href="/"
-                on:click={() => {
-                    changeType("score");
-                    activeType = "score";
-                }}
-                class="type-switcher-item-link"
-                class:active={activeType === "score"}
-            >
+            <a href="/?type=score" class="type-switcher-item-link" class:active={type === "score"}>
                 score
             </a>
         </li>
