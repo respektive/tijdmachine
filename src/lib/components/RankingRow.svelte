@@ -12,15 +12,15 @@
 
     function getGradeCount(user, grade) {
         if (!user.grades) {
-            return formatValue(user[`count${grade}`]);
+            return formatValue(user[grade]);
         }
 
         switch (grade) {
-            case "SS":
+            case "countSS":
                 return formatValue(user.grades.ss + user.grades.ssh);
-            case "S":
+            case "countS":
                 return formatValue(user.grades.s + user.grades.sh);
-            case "A":
+            case "countA":
                 return formatValue(user.grades.a);
             default:
                 return 0;
@@ -92,7 +92,7 @@
             {/if}
         {:else if isGrade && "grades" in user}
             <td class="ranking-row dimmed">
-                {getGradeCount(user, "S")}
+                {getGradeCount(user, key)}
             </td>
         {/if}
     {/each}
