@@ -16,7 +16,7 @@
     },
     "type": "module",
     "dependencies": {
-        "mongodb": "^5.6.0"
+        "mongodb": "^6.5.0"
     },
     "main": "svelte.config.js",
     "author": "respektive",
